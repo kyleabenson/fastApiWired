@@ -1,13 +1,14 @@
+import uvicorn
 from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
-from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+#from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 
 
 
 app = FastAPI()
 
-FastAPIInstrumentor.instrument_app(app)
+#FastAPIInstrumentor.instrument_app(app)
 
 class Item(BaseModel):
     id: int
@@ -31,3 +32,5 @@ async def add_item(item: Item):
     return todos
 
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
